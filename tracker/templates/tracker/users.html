@@ -1,0 +1,47 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+
+<div class="stats-conatiner">
+    <div style="margin: 2rem; padding-left: 0.5%">
+        <form method="get" action="">
+            <div style="display: flex; gap: 1rem;">
+                <input style="border-radius: 5px" type="text" name="query" placeholder="Search users by name"
+                       value="{{ request.GET.query }}">
+                <div style="width: 100px">
+                    <button class="stats-card-layout-workout-button" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="stats-table-container" style="border: none; margin:  5rem auto; margin-top: 1rem; width: 95%">
+        <table class="stats-table">
+            <thead class="stats-header">
+            <tr>
+                <th class="table-cell">Name</th>
+                <th class="table-cell">Age</th>
+                <th class="table-cell">Phone</th>
+                <th class="table-cell">Email</th>
+                <th class="table-cell">Date Created</th>
+                <th class="table-cell"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+            <tr>
+                <td class="table-cell">{{ user.name }}</td>
+                <td class="table-cell">{{ user.age }}</td>
+                <td class="table-cell">{{ user.phone }}</td>
+                <td class="table-cell">{{ user.email }}</td>
+                <td class="table-cell">{{ user.date_created }}</td>
+                <td class="table-cell"><a href="{% url 'user_details' user.id %}" style="display: flex; place-content: center">Details</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+

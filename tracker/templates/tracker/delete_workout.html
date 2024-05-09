@@ -1,0 +1,21 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+
+<div class="stats-container"
+     style="background-color: white; border-radius: 1rem; margin-top: 6rem; padding: 2rem; border: 1px solid #D1D5DB; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);">
+    <span style="display: flex; justify-content: center">Are you sure you want to delete the workout {{ item }}?</span>
+    <form style="display: flex; justify-content: center; gap: 2rem" action="{% url 'delete_workout' item.id %}"
+          method="POST">
+        {% csrf_token %}
+        {{ form }}
+
+        <a href="{% url 'user_details' item.user.id %}"
+           style="display: flex; justify-content: center; align-items: center; font-size: 0.75rem;line-height: 1rem; text-decoration: none; width: 100px"
+           class="stats-card-layout-delete-button">
+            Cancel
+        </a>
+        <input class="stats-card-layout-workout-button" style="width: 100px" type="submit" name="Confirm">
+    </form>
+</div>
+{% endblock %}

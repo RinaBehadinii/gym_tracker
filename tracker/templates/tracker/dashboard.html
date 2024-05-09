@@ -1,0 +1,80 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+
+<div class="stats-container">
+    <div class="stats-card-container" style="margin-bottom: 4rem">
+        <div class="stats-card" style="background-color: rgb(254 226 226);">
+            <span class="stats-card-title" style="display: flex; justify-content: center">Today's Users</span>
+            <span class="card-items">{{ total_users_today }}</span>
+        </div>
+        <div class="stats-card" style="background-color: rgb(224 242 254);">
+            <span class="stats-card-title" style="display: flex; justify-content: center">Today's Workouts</span>
+            <span class="card-items">{{ total_workouts_today }}</span>
+
+        </div>
+        <div class="stats-card" style="background-color: rgb(254 243 199);">
+            <span class="stats-card-title" style="display: flex; justify-content: center">Today's Exercises</span>
+            <span class="card-items">{{ total_exercises }}</span>
+
+        </div>
+        <div class="stats-card" style="background-color: rgb(243 232 255);">
+            <span class="stats-card-title" style="display: flex; justify-content: center">Today's Calories</span>
+            <span class="card-items">{{ total_calories }}</span>
+
+        </div>
+    </div>
+    <div class="stats-card-container">
+        <div class="stats-card">
+            <span class="stats-card-title" style="display: flex; justify-content: center">User Statistics</span>
+            <div class="stats-card-layout"
+                 style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1rem">
+                <div style="display: flex; justify-content: center; gap: 1rem">
+                    <span style="font-weight: bold">Total Users: </span>
+                    <span>{{ total_users }}</span>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 1rem">
+                    <span style="font-weight: bold">Average Age of Users: </span>
+                    <span>{{ average_age }}</span>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem">
+                    <span style="font-weight: bold">Average Membership Duration: </span>
+                    <span>{{ average_membership_duration }} Days</span>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem">
+                    <span style="font-weight: bold">Average Workouts per User: </span>
+                    <span>{{ average_workouts_per_user }}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="stats-card-container">
+        <div class="stats-card">
+            <span class="stats-card-title" style="display: flex; justify-content: center">Workout Statistics</span>
+            <div class="stats-card-layout"
+                 style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1rem">
+                <div style="display: flex; justify-content: center; gap: 1rem">
+                    <span style="font-weight: bold">Total Workouts: </span>
+                    <span>{{ total_workouts }}</span>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 1rem">
+                    <span style="font-weight: bold">Average Duration of Workouts: </span>
+                    <span>{{ average_duration }}</span>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem">
+                    <span style="font-weight: bold">Average Calories per Workouts: </span>
+                    <span>{{ average_calories_per_workout }}</span>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem">
+                    <span style="font-weight: bold">Most Popular Exercise: </span>
+                    <span>{{ most_popular_exercise }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,96 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+
+<div class="stats-container" style="margin-top: 1rem">
+    <div>
+        <a href="{% url 'users' %}" class="back-to-users">
+            <span style="font-size: 1.5rem; line-height: 2rem; margin-top: 0.2rem"><</span>
+            <span> Back to Users</span>
+        </a>
+    </div>
+    <div class="stats-card-container">
+        <div class="stats-card">
+            <span class="stats-card-title">User Details</span>
+            <div class="stats-card-layout">
+                <div>
+                    <span style="font-weight: bold">Name: </span>
+                    <span>{{ user.name }}</span>
+                </div>
+                <div>
+                    <span style="font-weight: bold">Age: </span>
+                    <span>{{ user.age }}</span>
+                </div>
+                <div>
+                    <span style="font-weight: bold">Email: </span>
+                    <span>{{ user.email }}</span>
+                </div>
+                <div>
+                    <span style="font-weight: bold">Phone: </span>
+                    <span>{{ user.phone }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="stats-card">
+            <span class="stats-card-title">Workout Details</span>
+            <div class="stats-card-layout">
+                <div>
+                    <span style="font-weight: bold">Total Workouts: </span>
+                    <span>{{ total_workouts }}</span>
+                </div>
+                <div>
+                    <span style="font-weight: bold">Total Calories Lost: </span>
+                    <span>{{ total_calories }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="stats-card">
+            <span class="stats-card-title">Manage User</span>
+            <div class="stats-card-layout" style="margin-top: 1.5rem">
+                <a href="{% url 'create_workout' user.id %}">
+                    <button class="stats-card-layout-workout-button">
+                        Add Workout
+                    </button>
+                </a>
+<!--                <button class="stats-card-layout-update-button">Update User</button>-->
+<!--                <button class="stats-card-layout-delete-button">Delete User</button>-->
+            </div>
+        </div>
+    </div>
+    <table class="stats-table">
+        <thead class="stats-header">
+        <tr>
+            <th class="table-cell">Workout ID</th>
+            <th class="table-cell">Duration</th>
+            <th class="table-cell">Total Exercises</th>
+            <th class="table-cell">Total Calories</th>
+            <th class="table-cell">Date</th>
+            <th class="table-cell"></th>
+            <th class="table-cell"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for workout in all_workout_details %}
+        <tr>
+            <td class="table-cell">{{ workout.id }}</td>
+            <td class="table-cell">{{ workout.total_duration }}</td>
+            <td class="table-cell">{{ workout.total_exercises }}</td>
+            <td class="table-cell">{{ workout.total_calories }}</td>
+            <td class="table-cell">{{ workout.start_time }}</td>
+            <td class="table-cell"><a
+                    class="stats-card-layout-update-button"
+                    style="text-decoration: none; padding: 0.2rem; font-size: 0.75rem; line-height: 1rem; margin-left: 33%"
+                    href="{% url 'update_workout' workout.id %}">Update</a>
+            </td>
+            <td class="table-cell"><a
+                    class="stats-card-layout-delete-button"
+                    style="text-decoration: none; padding: 0.2rem; font-size: 0.75rem; line-height: 1rem; margin-left: 30%"
+                    href="{% url 'delete_workout' workout.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

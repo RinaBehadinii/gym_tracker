@@ -1,0 +1,17 @@
+<div class="navbar">
+    <div class="nav-items-container">
+        <span><a class="nav-items" style="text-decoration: none;"
+                 href="{% url 'home' %}">Home</a></span>
+        <span><a class="nav-items" style="text-decoration: none;"
+                 href="{% url 'user_details' request.user.id %}">Details</a></span>
+        {% if request.user.is_staff %}
+        <span><a class="nav-items" style="text-decoration: none" href="{% url 'users' %}">Users</a></span>
+        {% endif %}
+    </div>
+    <div class="user-details-container">
+        <span style="font-weight: 200">Hi, {{ request.user }}</span>
+        <span><a class="nav-items"
+                 style="text-decoration: none; font-size: 0.875rem; line-height: 1.25rem; font-weight: 200"
+                 href="{% url 'logout' %}">Logout</a></span>
+    </div>
+</div>
