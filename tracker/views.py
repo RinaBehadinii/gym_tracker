@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
 
-from tracker.models import Workout, WorkoutDetail, Exercise, User
+from tracker.models import Workout, WorkoutDetail, Exercise, UserProfile
 from django.db.models import Sum, Count, Avg, Min, ExpressionWrapper, fields, Q
 
 from .decorators import unauthenticated_user, allowed_users, admin_only, user_matches
@@ -23,14 +23,15 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            username = form.cleaned_data["username"]
+            username = form.cleaned_data.get("username")
 
             group = Group.objects.get(name='gym_user')
             user.groups.add(group)
-            # User.objects.create(user=user)
+
+            if not UserProfile.objects.filter(user=user).exists():
+                UserProfile.objects.create(user=user)
 
             messages.success(request, f'Account created for {username}')
-
             return redirect('login')
 
     context = {'form': form}
@@ -71,7 +72,7 @@ def home(request):
     today = timezone.now().date()
 
     workouts_today = Workout.objects.filter(start_time__date=today)
-    users_today = User.objects.filter(workout__in=workouts_today).distinct()
+    users_today = UserProfile.objects.filter(workout__in=workouts_today).distinct()
     total_users_today = users_today.count()
     total_workouts_today = workouts_today.count()
     total_exercises = Exercise.objects.filter(workoutdetail__workout__in=workouts_today).distinct().count()
@@ -82,11 +83,11 @@ def home(request):
     if total_calories is None:
         total_calories = 0
 
-    # User statistics
-    total_users = User.objects.count()
-    average_age = User.objects.aggregate(Avg('age'))['age__avg']
+    # UserProfile statistics
+    total_users = UserProfile.objects.count()
+    average_age = UserProfile.objects.aggregate(Avg('age'))['age__avg']
     # Calculate average membership duration in days in one step
-    average_membership_duration = User.objects.annotate(
+    average_membership_duration = UserProfile.objects.annotate(
         duration_days=ExpressionWrapper(
             (Now() - Min('date_created')),
             output_field=fields.DurationField()
@@ -127,7 +128,7 @@ def home(request):
 @login_required(login_url='login')
 @user_matches
 def user_details(request, id):
-    user = User.objects.get(id=id)
+    user = UserProfile.objects.get(id=id)
     workouts = Workout.objects.filter(user=user)
     total_workouts = workouts.count()
 
@@ -154,9 +155,9 @@ def user_details(request, id):
 def users(request):
     query = request.GET.get('query', '')
     if query:
-        users = User.objects.filter(Q(name__icontains=query))
+        users = UserProfile.objects.filter(Q(name__icontains=query))
     else:
-        users = User.objects.all()
+        users = UserProfile.objects.all()
 
     return render(request, 'tracker/users.html', {'users': users})
 
@@ -169,7 +170,7 @@ def createWorkout(request, id):
         extra=1,
         can_delete=False
     )
-    user = User.objects.get(id=id)
+    user = UserProfile.objects.get(id=id)
     if request.method == 'POST':
         form = WorkoutForm(request.POST)
         if form.is_valid():

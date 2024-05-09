@@ -21,7 +21,6 @@
                 <th class="table-cell">Name</th>
                 <th class="table-cell">Age</th>
                 <th class="table-cell">Phone</th>
-                <th class="table-cell">Email</th>
                 <th class="table-cell">Date Created</th>
                 <th class="table-cell"></th>
             </tr>
@@ -32,7 +31,6 @@
                 <td class="table-cell">{{ user.name }}</td>
                 <td class="table-cell">{{ user.age }}</td>
                 <td class="table-cell">{{ user.phone }}</td>
-                <td class="table-cell">{{ user.email }}</td>
                 <td class="table-cell">{{ user.date_created }}</td>
                 <td class="table-cell"><a href="{% url 'user_details' user.id %}" style="display: flex; place-content: center">Details</a>
                 </td>

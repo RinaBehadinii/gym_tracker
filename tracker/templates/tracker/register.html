@@ -12,6 +12,18 @@
     <form class="form" method="POST" action="">
         {% csrf_token %}
         <div class="input-group">
+            <span class="label">Name</span>
+            {{ form.name }}
+        </div>
+        <div class="input-group">
+            <span class="label">Age</span>
+            {{ form.age }}
+        </div>
+        <div class="input-group">
+            <span class="label">Phone</span>
+            {{ form.phone }}
+        </div>
+        <div class="input-group">
             <span class="label">Username</span>
             {{ form.username }}
         </div>
