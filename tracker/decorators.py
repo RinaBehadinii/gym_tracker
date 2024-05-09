@@ -42,15 +42,3 @@ def admin_only(view_func):
             return view_func(request, *args, **kwargs)
 
     return wrapper_func
-
-
-def user_matches(view_func):
-    def wrapper_func(request, *args, **kwargs):
-        user_id = kwargs.get('id', None)
-
-        if user_id and request.user.is_authenticated and request.user.id == user_id:
-            return view_func(request, *args, **kwargs)
-        else:
-            return HttpResponse('You are not authorized to view this page.')
-
-    return wrapper_func

@@ -10,10 +10,11 @@ from django.utils import timezone
 from tracker.models import Workout, WorkoutDetail, Exercise, UserProfile
 from django.db.models import Sum, Count, Avg, Min, ExpressionWrapper, fields, Q
 
-from .decorators import unauthenticated_user, allowed_users, admin_only, user_matches
+from .decorators import unauthenticated_user, allowed_users, admin_only
 from .forms import WorkoutForm, CreateUserForm
 
 from django.contrib import messages
+from django.http import HttpResponse
 
 
 @unauthenticated_user
@@ -126,10 +127,16 @@ def home(request):
 
 
 @login_required(login_url='login')
-@user_matches
 def user_details(request, id):
-    user = UserProfile.objects.get(id=id)
-    workouts = Workout.objects.filter(user=user)
+    try:
+        user_profile = UserProfile.objects.get(id=id)
+    except UserProfile.DoesNotExist:
+        return HttpResponse("User profile does not exist.", status=404)
+
+    if request.user != user_profile.user and not request.user.groups.filter(name='admin').exists():
+        return HttpResponseForbidden("You are not authorized to view this page.")
+
+    workouts = Workout.objects.filter(user=user_profile)
     total_workouts = workouts.count()
 
     total_calories = 0
@@ -145,9 +152,10 @@ def user_details(request, id):
         'id', 'start_time', 'total_duration', 'total_exercises', 'total_calories'
     )
 
-    return render(request, 'tracker/user_details.html',
-                  {'user': user, 'workouts': workouts, 'total_calories': total_calories,
-                   "total_workouts": total_workouts, 'all_workout_details': all_workout_details})
+    return render(request, 'tracker/user_details.html', {
+        'user': user_profile, 'workouts': workouts, 'total_calories': total_calories,
+        "total_workouts": total_workouts, 'all_workout_details': all_workout_details
+    })
 
 
 @login_required(login_url='login')

@@ -2,13 +2,15 @@
 
 {% block content %}
 
-<div class="stats-container" style="margin-top: 1rem">
+<div class="stats-container" style="margin-top: 2rem">
+    {% if request.user.is_staff %}
     <div>
         <a href="{% url 'users' %}" class="back-to-users">
             <span style="font-size: 1.5rem; line-height: 2rem; margin-top: 0.2rem"><</span>
             <span> Back to Users</span>
         </a>
     </div>
+    {% endif %}
     <div class="stats-card-container">
         <div class="stats-card">
             <span class="stats-card-title">User Details</span>
@@ -52,8 +54,8 @@
                         Add Workout
                     </button>
                 </a>
-<!--                <button class="stats-card-layout-update-button">Update User</button>-->
-<!--                <button class="stats-card-layout-delete-button">Delete User</button>-->
+                <!--                <button class="stats-card-layout-update-button">Update User</button>-->
+                <!--                <button class="stats-card-layout-delete-button">Delete User</button>-->
             </div>
         </div>
     </div>

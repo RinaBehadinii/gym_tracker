@@ -18,6 +18,7 @@
         <table class="stats-table">
             <thead class="stats-header">
             <tr>
+                <th class="table-cell">Id</th>
                 <th class="table-cell">Name</th>
                 <th class="table-cell">Age</th>
                 <th class="table-cell">Phone</th>
@@ -28,6 +29,7 @@
             <tbody>
             {% for user in users %}
             <tr>
+                <td class="table-cell">{{ user.id }}</td>
                 <td class="table-cell">{{ user.name }}</td>
                 <td class="table-cell">{{ user.age }}</td>
                 <td class="table-cell">{{ user.phone }}</td>
