@@ -52,6 +52,18 @@ body {
     background-color: white;
 }
 
+input {
+    border: 1px solid #6B7280;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: #111827;
+    height: 20px;
+    padding-left: 1rem;
+    border-radius: 0.2rem;
+    width: 200px;
+    background-color: white;
+}
+
 .message {
     font-size: 0.875rem;
     line-height: 1.25rem;

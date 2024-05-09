@@ -18,7 +18,7 @@ from django.http import HttpResponse
 
 
 @unauthenticated_user
-def registerPage(request):
+def register_page(request):
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
@@ -40,7 +40,7 @@ def registerPage(request):
 
 
 @unauthenticated_user
-def loginPage(request):
+def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -56,12 +56,7 @@ def loginPage(request):
     return render(request, 'tracker/login.html', context)
 
 
-def userPage(request):
-    context = {}
-    return render(request, 'tracker/user.html', context)
-
-
-def logoutUser(request):
+def logout_user(request):
     logout(request)
     return redirect('login')
 
@@ -134,7 +129,7 @@ def user_details(request, id):
         return HttpResponse("User profile does not exist.", status=404)
 
     if request.user != user_profile.user and not request.user.groups.filter(name='admin').exists():
-        return HttpResponseForbidden("You are not authorized to view this page.")
+        return HttpResponse("You are not authorized to view this page.")
 
     workouts = Workout.objects.filter(user=user_profile)
     total_workouts = workouts.count()
@@ -171,7 +166,7 @@ def users(request):
 
 
 @login_required(login_url='login')
-def createWorkout(request, id):
+def create_workout(request, id):
     WorkoutDetailFormSet = inlineformset_factory(
         Workout, WorkoutDetail,
         fields=('exercise', 'duration', 'calories_burned'),
@@ -198,7 +193,7 @@ def createWorkout(request, id):
 
 
 @login_required(login_url='login')
-def updateWorkout(request, id):
+def update_workout(request, id):
     WorkoutDetailFormSet = inlineformset_factory(
         Workout, WorkoutDetail,
         fields=('exercise', 'duration', 'calories_burned'),
@@ -220,7 +215,7 @@ def updateWorkout(request, id):
 
 
 @login_required(login_url='login')
-def deleteWorkout(request, id):
+def delete_workout(request, id):
     workout = Workout.objects.get(id=id)
 
     if (request.method == 'POST'):
