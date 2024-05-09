@@ -27,7 +27,7 @@ def registerPage(request):
 
             group = Group.objects.get(name='gym_user')
             user.groups.add(group)
-            User.objects.create(user=user)
+            # User.objects.create(user=user)
 
             messages.success(request, f'Account created for {username}')
 

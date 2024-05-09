@@ -1,11 +1,30 @@
-<h1>Login</h1>
-<form method="POST" action="">
-    {% csrf_token %}
-    {% for message in messages %}
-    <p id="messages">{{ message }}</p>
-    {% endfor %}
-    <a href="{% url 'register' %}">Sign Up</a>
-    <input type="text" name="username" id="username">
-    <input type="password" name="password" id="password">
-    <input type="submit" name="Login User">
-</form>
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'tracker/stats.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'tracker/authentication.css' %}" type="text/css">
+</head>
+<body>
+<div class="container">
+    <h1 class="title">Login</h1>
+    <form class="form" method="POST" action="">
+        {% csrf_token %}
+        <div class="input-group">
+            <span class="label">Username</span>
+            <input class="input" type="text" name="username" id="username">
+        </div>
+        <div class="input-group">
+            <span class="label">Password</span>
+            <input class="input" type="password" name="password" id="password">
+        </div>
+        {% for message in messages %}
+        <p class="message">{{ message }}</p>
+        {% endfor %}
+        <input class="submit-button stats-card-layout-workout-button" type="submit" name="Login" value="Login">
+        <a class="link" href="{% url 'register' %}">Sign Up</a>
+    </form>
+</div>
+</body>
+</html>

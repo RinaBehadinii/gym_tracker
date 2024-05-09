@@ -1,0 +1,67 @@
+/* Additional CSS for login form */
+body {
+    background-color: #F3F4F6;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 6rem;
+    padding: 2rem;
+    width: 30%;
+    height: 100%;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+    color: rgb(63, 98, 18);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.label {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.input {
+    border: 1px solid #6B7280;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: #111827;
+    height: 20px;
+    padding-left: 1rem;
+    border-radius: 0.2rem;
+    width: 200px;
+    background-color: white;
+}
+
+.message {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.link {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.submit-button {
+    width: 200px;
+}
