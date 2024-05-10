@@ -22,7 +22,7 @@ The Gym Workout Tracker is a sophisticated web-based application developed using
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/gym-workout-tracker.git
+git clone https://github.com/RinaBehadinii/gym_tracker
 cd gym-workout-tracker
 
 # Install dependencies
