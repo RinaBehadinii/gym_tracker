@@ -17,6 +17,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 
 
+#TODO: Fix oncreate initial user
 @unauthenticated_user
 def register_page(request):
     form = CreateUserForm()
