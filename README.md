@@ -37,7 +37,8 @@ python manage.py createsuperuser
 # Run the server
 python manage.py runserver
 
-# Post-Installation Steps
+```
+## Post-Installation Steps
 
 After creating the superuser, follow these steps to complete the setup:
 
