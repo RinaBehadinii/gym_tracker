@@ -42,7 +42,7 @@ python manage.py runserver
 
 After creating the superuser, follow these steps to complete the setup:
 
-## 1. Create Roles in the Group Table
+### 1. Create Roles in the Group Table
 
 1. Access the Django admin interface at [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/).
 2. Navigate to the **Groups** section.
@@ -50,13 +50,13 @@ After creating the superuser, follow these steps to complete the setup:
    - `admin`
    - `gym_user`
 
-## 2. Assign the Admin Role to Your Superuser
+### 2. Assign the Admin Role to Your Superuser
 
 1. Go to the **Users** section in the admin interface.
 2. Select your superuser.
 3. Assign the `admin` group to your superuser.
 
-## 3. Create a UserProfile for Your Superuser
+### 3. Create a UserProfile for Your Superuser
 
 1. Navigate to the **UserProfiles** section.
 2. Create a new UserProfile referencing your superuser.
